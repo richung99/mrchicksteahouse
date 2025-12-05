@@ -1,47 +1,75 @@
 /* ================================
-   GLOBAL RESET
+   GLOBAL RESET / BASE
 ================================ */
+
 * {
 	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
 }
 
-html, body {
+html,
+body {
+	margin: 0;
+	padding: 0;
 	height: 100%;
 	width: 100%;
-	background: #111;
-	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-	overflow: hidden; /* prevent default scrollbars */
+	background: #111; /* default background */
+	font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+		sans-serif;
+	overflow: hidden; /* we will keep things non-scrollable by default */
 }
 
 
 /* ================================
-   FULLSCREEN IMAGE MENU
+   LANDING PAGE (index.html)
 ================================ */
 
-/* Wrapper to clamp overflow and maintain fixed layout */
-.menu-wrapper {
-	position: fixed;
-	inset: 0;        /* top:0; right:0; bottom:0; left:0 */
-	overflow: hidden;
+.landing {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	gap: 1.5rem;
+	background: #f7f0e8;
 }
 
-/* Main container */
-main.menu-screen {
+.landing h1 {
+	font-size: 2.5rem;
+	margin: 0;
+	color: #222;
+}
+
+.landing a {
+	text-decoration: none;
+	padding: 0.75rem 1.5rem;
+	border-radius: 999px;
+	background: #111;
+	color: #fff;
+	font-size: 1.1rem;
+	letter-spacing: 0.05em;
+	text-transform: uppercase;
+}
+
+
+/* ================================
+   MENU PAGES (drink / food)
+================================ */
+
+/* Main full-screen container */
+.menu-screen {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 100vh;
 	width: 100vw;
-	height: 100svh;   /* safe viewport height for TVs + fullscreen */
-	overflow: hidden;
+	overflow: hidden; /* clip any overflows from rounding */
 }
 
-/* Menu image that scales but never distorts */
+/* Menu image fills viewport and scales */
 .menu-screen img {
-	width: 100%;
-	height: 100%;
-	object-fit: contain;  /* change to 'cover' if you want no borders */
+	width: 100vw;
+	height: 100vh;
+	object-fit: contain;   /* use 'cover' if you prefer cropping */
 	display: block;
 }
 
@@ -61,59 +89,16 @@ main.menu-screen {
 	border-radius: 6px;
 	font-size: 16px;
 	cursor: pointer;
-	z-index: 999999;        /* Always on top */
+	z-index: 9999;
 	transition: opacity 0.3s ease;
 }
 
-#fs-btn:hover {
-	background: rgba(255, 255, 255, 0.2);
-}
-
-/* Hide the button in fullscreen */
-:fullscreen #fs-btn,
-:-webkit-full-screen #fs-btn {
+/* simple helper class for hiding the button */
+#fs-btn.hidden {
 	opacity: 0;
 	pointer-events: none;
 }
 
-
-/* ================================
-   FULLSCREEN FIXES
-   (removes scrollbars in fullscreen mode)
-================================ */
-
-:fullscreen body,
-:-webkit-full-screen body {
-	overflow: hidden !important;
-}
-
-
-/* ================================
-   OPTIONAL LANDING PAGE
-================================ */
-
-.landing {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	gap: 1.5rem;
-	background: #f7f0e8;
-}
-
-.landing h1 {
-	font-size: 2.5rem;
-	margin: 0;
-}
-
-.landing a {
-	text-decoration: none;
-	padding: 0.75rem 1.5rem;
-	border-radius: 999px;
-	background: #111;
-	color: #fff;
-	font-size: 1.1rem;
-	letter-spacing: 0.05em;
-	text-transform: uppercase;
+#fs-btn:hover {
+	background: rgba(255, 255, 255, 0.2);
 }
