@@ -58,3 +58,17 @@ main.menu-screen {
 	overflow: hidden !important;
 }
 
+#fs-btn {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 999999;        /* ensure above fullscreen content */
+	opacity: 1;
+	pointer-events: auto;
+}
+
+:fullscreen #fs-btn,
+:-webkit-full-screen #fs-btn {
+	opacity: 0;              /* hide in fullscreen (but not disabled) */
+	pointer-events: none;    /* no clicking while hidden */
+}
